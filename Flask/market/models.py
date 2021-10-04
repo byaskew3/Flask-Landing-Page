@@ -35,6 +35,5 @@ class Champion(db.Model):
     health = db.Column(db.String(length=2), nullable=False)
     description = db.Column(db.String(length=500), nullable=False, unique=True)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
-
     def __repr__(self):
         return f'Champion: {self.name}'

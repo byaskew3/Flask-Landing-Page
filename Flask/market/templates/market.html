@@ -2,35 +2,46 @@
 {% block title %}
     Champion Pool
 {% endblock %}
-
 {% block content %}
-    <table class="table table-hover table-dark">
-        <thead>
-            <tr>
-                <!-- Columns -->
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Power</th>
-                <th scope="col">Health</th>
-                <th scope="col">Mana Cost</th>
-                <th scope="col">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!--  rows inside the table  -->
-                {% for item in items %}
+    <div class="row" style="margin-top: 20px; margin-left: 20px;">
+        <div class="col-8">
+                <h2>Available Cards on the Market</h2>
+                <br>
+            <table class="table table-hover table-dark">
+                <thead>
                     <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.power }}</td>
-                        <td>{{ item.health }}</td>
-                        <td>{{ item.cost }}</td>
-                        <td>
-                            <button class="btn btn-outline btn-light">More Info</button>
-                            <button class="btn btn-outline btn-info">Buy Champion</button>
-                        </td>
+                        <!-- Columns -->
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Power</th>
+                        <th scope="col">Health</th>
+                        <th scope="col">Mana Cost</th>
+                        <th scope="col">Options</th>
                     </tr>
-                {% endfor %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    <!--  rows inside the table  -->
+                        {% for item in items %}
+                        {% include 'includes/items_modals.html' %}
+                            <tr>
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.power }}</td>
+                                <td>{{ item.health }}</td>
+                                <td>{{ item.cost }}</td>
+                                <td>
+                                    <button class="btn btn-outline btn-light" data-toggle="modal" data-target="#exampleModal-{{ item.id }}">More Info</button>
+                                    <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#exampleModal-Purchase-{{ item.id }}">Buy Champion</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h2>Owned Cards</h2>
+            <p>Click to sell your owned cards.</p>
+            <br>
+        </div>
+    </div>
 {% endblock %}
