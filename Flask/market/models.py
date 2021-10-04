@@ -27,6 +27,12 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
+    def can_purchase(self, item_obj):
+        return self.budget >= item_obj.cost
+    
+    def can_sell(self, item_obj):
+        return item_obj in self.items
+
 class Champion(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=30), nullable=False, unique=True)
@@ -37,3 +43,13 @@ class Champion(db.Model):
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
     def __repr__(self):
         return f'Champion: {self.name}'
+
+    def buy(self, user):
+        self.owner = user.id
+        user.budget -= self.cost
+        db.session.commit()
+    
+    def sell(self, user):
+        self.owner = None
+        user.budget += self.cost
+        db.session.commit()

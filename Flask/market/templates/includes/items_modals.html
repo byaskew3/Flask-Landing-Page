@@ -47,12 +47,12 @@
               By clicking Purchase, you will purchase this champion.
             </h6>
             <br>
+            <input id="purchased_champion" name="purchased_champion" type="hidden" value="{{ item.name }}">
             {{ purchase_champion.submit(class="btn btn-outline-success btn-block") }}
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"></button>
         </div>
       </div>
     </div>
